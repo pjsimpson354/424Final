@@ -2,7 +2,7 @@ services:
 
   frontend:
 
-    image: ghcr.io/pjsimpson354/424FinalE/frontend:latest
+    image: ghcr.io/pjsimpson354/424final/frontend:latest
 
     container_name: frontend-container
 
@@ -14,7 +14,7 @@ services:
 
   backend:
 
-    image: ghcr.io/pjsimpson354/424Final/backend:latest
+    image: ghcr.io/pjsimpson354/424final/backend:latest
 
     container_name: backend-container
 

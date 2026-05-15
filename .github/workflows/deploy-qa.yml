@@ -98,7 +98,7 @@ jobs:
 
           username: ${{ secrets.QA_USER }}
 
-          key: ${{ secrets.QA_SSH_SECRET }}
+          key: ${{ secrets.QA_SSH_KEY }}
 
           source: "docker-compose.qa.yml,nginx/nginx.conf"
 

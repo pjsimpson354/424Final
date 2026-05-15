@@ -88,7 +88,7 @@ jobs:
 
 
 
-       - name: Deploy locally on QA runner
+      - name: Deploy locally on QA runner
 
         run: |
 

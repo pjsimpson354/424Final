@@ -34,7 +34,7 @@ jobs:
 
   build-and-deploy:
 
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, qa]
 
 
 
@@ -88,44 +88,12 @@ jobs:
 
 
 
-      - name: Copy deployment files to QA server
+      - name: Deploy locally on QA runner
 
-        uses: appleboy/scp-action@v0.1.7
+        run: |
 
-        with:
+          docker compose -f docker-compose.qa.yml pull
 
-          host: ${{ secrets.QA_HOST }}
+          docker compose -f docker-compose.qa.yml up -d
 
-          username: ${{ secrets.QA_USER }}
-
-          key: ${{ secrets.QA_SSH_KEY }}
-
-          source: "docker-compose.qa.yml,nginx/nginx.conf"
-
-          target: "~/qa-app"
-
-
-
-      - name: Deploy on QA server
-
-        uses: appleboy/ssh-action@v1.0.3
-
-        with:
-
-          host: ${{ secrets.QA_HOST }}
-
-          username: ${{ secrets.QA_USER }}
-
-          key: ${{ secrets.QA_SSH_KEY }}
-
-          script: |
-
-            cd ~/qa-app
-
-            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-
-            docker compose -f docker-compose.qa.yml pull
-
-            docker compose -f docker-compose.qa.yml up -d
-
-            docker image prune -f
+          docker image prune -f

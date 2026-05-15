@@ -88,9 +88,13 @@ jobs:
 
 
 
-      - name: Deploy locally on QA runner
+       - name: Deploy locally on QA runner
 
         run: |
+
+          docker compose -f docker-compose.qa.yml down || true
+
+          docker rm -f frontend-container backend-container nginx-container 2>/dev/null || true
 
           docker compose -f docker-compose.qa.yml pull
 
